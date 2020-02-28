@@ -8,8 +8,11 @@ import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract ConfidenceToken is ERC20Detailed, ERC20, Ownable{
 
-  constructor () public ERC20Detailed("TokenConfidence", "TKCONF", 18) {
-        _mint(owner(), 10000 * (10 ** uint256(decimals())));
+  constructor () public ERC20Detailed("ConfidenceToken", "TKCONF", 2) {
+        _mint(owner(), 10000000000);
   }
 
+  //constructor () public ERC20Detailed("ConfidenceToken", "TKCONF", 18) {
+  //      _mint(owner(), 10000 * (10 ** uint256(decimals())));
+  //}
 }
