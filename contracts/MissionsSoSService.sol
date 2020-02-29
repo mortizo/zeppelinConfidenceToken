@@ -1,6 +1,8 @@
 pragma solidity  >=0.5.16 <0.7.0;
 
 import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "./ConfidenceToken.sol";
+
 
 contract MissionsSoSService{
 
@@ -81,9 +83,18 @@ contract MissionsSoSService{
     mapping(uint => uint) private stateServiceMap;
 
 
+    //-------------Token-------------
+    ConfidenceToken private confidenceToken;
 
+    function confidenceTokenName() public view returns (string memory) {
+        return confidenceToken.name();
+    }
 
     //--------Mission---------
+
+    constructor() public{
+        confidenceToken = ConfidenceToken(0x99E9Af23C8982302DF19c652E6569E12E7F172d2);
+    }
 
     function totalMission() public view returns (uint) {
         return _totalMission;
