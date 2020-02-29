@@ -90,11 +90,15 @@ contract MissionsSoSService{
         return confidenceToken.name();
     }
 
-    //--------Mission---------
+    //--------Constructor---------
 
     constructor() public{
         confidenceToken = ConfidenceToken(0x99E9Af23C8982302DF19c652E6569E12E7F172d2);
     }
+
+
+    //--------Mission---------
+
 
     function totalMission() public view returns (uint) {
         return _totalMission;
