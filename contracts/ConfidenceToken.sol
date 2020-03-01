@@ -14,11 +14,6 @@ contract ConfidenceToken is ERC20Detailed, ERC20, Ownable{
         _mint(owner(), 10000000000);
   }
 
- 
- // constructor () public ERC20Detailed("ConfidenceToken", "TKCONF", 2) {
- //       _mint(owner(), 10000000000);
-//  }
-
   //constructor () public ERC20Detailed("ConfidenceToken", "TKCONF", 18) {
   //      _mint(owner(), 10000 * (10 ** uint256(decimals())));
   //}

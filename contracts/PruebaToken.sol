@@ -37,8 +37,7 @@ contract PruebaToken{
 
 
     //--------Hacer Transferencias--------
-    function setTransferencia(address _addressRecipient, uint256 _monto) external
-    {
+    function setTransferencia(address _addressRecipient, uint256 _monto) external{
         
     }
 
