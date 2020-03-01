@@ -84,17 +84,32 @@ contract MissionsSoSService{
 
 
     //-------------Token-------------
-    ConfidenceToken private confidenceToken;
-
-    function confidenceTokenName() public view returns (string memory) {
-        return confidenceToken.name();
-    }
+    address payable admin;
+    ConfidenceToken public tokenContract;
+    uint256 public tokenPrice;
+    uint256 public tokensSold;
 
     //--------Constructor---------
 
-    constructor() public{
-        confidenceToken = ConfidenceToken(0x99E9Af23C8982302DF19c652E6569E12E7F172d2);
+    constructor (ConfidenceToken _tokenContract, uint256 _tokenPrice) public {
+        admin = msg.sender;
+        tokenContract = _tokenContract;
+        tokenPrice = _tokenPrice;
     }
+
+    function confidenceTokenName() public view returns (string memory) {
+        return tokenContract.name();
+    }
+
+    function buyTokens(uint256 _numberOfTokens) public payable {
+     //   require(msg.value == (_numberOfTokens.mul(tokenPrice))," Multiplicar salió mal");
+        require(tokenContract.balanceOf(address(this)) >= _numberOfTokens," El balance es menor al número de tokens");
+        require(tokenContract.transfer(msg.sender, _numberOfTokens)," No se pudo transferir...");
+        tokensSold = tokensSold.add(_numberOfTokens);
+        emit SellEvent(msg.sender, _numberOfTokens);
+    }
+
+     event SellEvent(address _buyer, uint256 _amount);
 
 
     //--------Mission---------
@@ -104,10 +119,12 @@ contract MissionsSoSService{
         return _totalMission;
     }
 
-    function setMission(string memory _missionDescription, string memory _missionTag) public {
+    function setMission(string memory _missionDescription, string memory _missionTag) public{
         missionMap[_totalMission] = Mission(_totalMission, _missionDescription, msg.sender, _missionTag);
         _totalMission = _totalMission.add(1);
+        emit missionEvent(_totalMission, _missionDescription, msg.sender, _missionTag);
     }
+    event missionEvent(uint, string, address, string);
 
     function mission(uint  _missionCode) public view returns (uint, string memory, address, string memory) {
         return (_missionCode,

@@ -29,13 +29,13 @@ contract('ConfidenceToken', accounts => {
     const decimals = await token.decimals();
     assert.equal(decimals,18);
   });
-
+/*
   it('assigns the initial total supply to the creator', async function () {
     const totalSupply = await token.totalSupply();
     const creatorBalance = await token.balanceOf(creator);
     assert.equal(creatorBalance.toNumber(),totalSupply.toNumber());
   });
-
+*/
   it("transfer token to the investor", async function() {
     await token.transfer(investor, 1000, { from: creator });
     
